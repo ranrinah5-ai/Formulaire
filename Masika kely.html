@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Nathan ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --deep-red: #8b0000;
+            --main-pink: #ff4d8d;
+            --bright-pink: #ff007f;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* FOND DÉGRADÉ ANIMÉ */
+            background: linear-gradient(-45deg, #ffc2d1, #ff85a2, #ff4d8d, #ff007f);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .emoji-img { width: 1.1em; height: 1.1em; vertical-align: middle; display: inline-block; }
+        .emoji-large { width: 80px; height: 80px; }
+
+        /* --- SECTION 1 : ENVELOPPE --- */
+        #step-envelope {
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.3s ease;
+            padding: 20px;
+            z-index: 10;
+        }
+        .click-text { font-family: 'Playfair Display', serif; color: white; margin-top: 10px; font-style: italic; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); font-size: 1.1rem; }
+
+        /* --- STYLE DES BOX --- */
+        .box {
+            display: none;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px 20px;
+            border-radius: 20px;
+            border: 3px solid var(--main-pink);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            max-width: 320px;
+            width: 85%;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.8s ease;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; color: var(--deep-red); margin: 5px 0; font-size: 1.5rem; }
+        h2 { font-family: 'Playfair Display', serif; color: var(--deep-red); margin: 5px 0; font-size: 1.1rem; }
+
+        #insistance-msg { 
+            color: var(--bright-pink); 
+            font-weight: 800; 
+            margin-top: 15px; 
+            min-height: 40px; 
+            font-size: 0.95rem;
+        }
+
+        /* --- BOUTONS --- */
+        .btn-container { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px; min-height: 80px; }
+        .btn {
+            padding: 10px 22px;
+            font-size: 0.9rem;
+            border: 2px solid var(--main-pink);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #btn-yes { background: var(--main-pink); color: white; z-index: 10; }
+        #btn-no { background: transparent; color: var(--main-pink); }
+
+        /* --- SECTION 2 : LE HACK --- */
+        #step-hack {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            color: #ff0033;
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        .hack-title { font-size: 1.2rem; margin-bottom: 20px; font-weight: bold; width: 90%; color: #ff0033; }
+        .progress-container { width: 85%; border: 2px solid #ff0033; height: 20px; margin: 20px 0; }
+        .progress-bar { width: 0%; height: 100%; background: #ff0033; }
+
+        /* --- SECTION 3 : FINAL --- */
+        #step-final { border: 4px double var(--gold); }
+        .rdv-text { color: var(--bright-pink); font-weight: 800; font-size: 1.2rem; margin-top: 15px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .vibrate { animation: vibrate 0.3s linear; }
+        @keyframes vibrate {
+            0% { transform: translate(0); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(-2px, -2px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="step-envelope" onclick="openLetter()">
+        <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Envelope/3D/envelope_3d.png" class="emoji-large" alt="Envelope">
+        <p class="click-text">Tu as reçu un message, Nathan... <br> (Clique pour ouvrir)</p>
+    </div>
+
+    <div class="box" id="step-question">
+        <h1>Pour Nathan <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Red%20heart/3D/red_heart_3d.png" class="emoji-img"></h1>
+        <h2>Veux-tu être mon Valentin ?</h2>
+        <div id="insistance-msg"></div>
+        <div class="btn-container">
+            <button class="btn" id="btn-yes">Oui <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Two%20hearts/3D/two_hearts_3d.png" class="emoji-img"></button>
+            <button class="btn" id="btn-no">Non <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Pensive%20face/3D/pensive_face_3d.png" class="emoji-img"></button>
+        </div>
+    </div>
+
+    <div id="step-hack">
+        <div class="hack-title" id="hack-main-title">⚠️ TRÈS BIEN JE VAIS TE HACKER MTN ALORS C TANT PIS POUR TOI ⚠️</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="bar"></div>
+        </div>
+        <p id="hack-status" style="font-size: 1.1rem;">HACK PROGRESS : 0%</p>
+    </div>
+
+    <div class="box" id="step-final">
+        <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Heart%20with%20ribbon/3D/heart_with_ribbon_3d.png" style="width: 70px; height: 70px;">
+        <h1 style="color: var(--main-pink); font-size: 2rem; margin-top: 15px;">Je t'aime !</h1>
+        <p style="font-size: 1rem;">C'était le seul choix possible de toute façon <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Smiling%20face%20with%20hearts/3D/smiling_face_with_hearts_3d.png" class="emoji-img"></p>
+        <p class="rdv-text">Prépare-toi pour le 14 février ! <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Sparkles/3D/sparkles_3d.png" class="emoji-img"></p>
+    </div>
+
+    <script>
+        const btnYes = document.getElementById('btn-yes');
+        const insistanceMsg = document.getElementById('insistance-msg');
+        const bar = document.getElementById('bar');
+        const hackStatus = document.getElementById('hack-status');
+        const hackTitle = document.getElementById('hack-main-title');
+
+        let clickCount = 0;
+        let yesScale = 1;
+
+        const phrases = [
+            "Re-réfléchis bien... <img src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Pleading%20face/3D/pleading_face_3d.png' class='emoji-img'>",
+            "Tu es vraiment sûr ? <img src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Flushed%20face/3D/flushed_face_3d.png' class='emoji-img'>",
+            "C'est ton dernier mot ? <img src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Broken%20heart/3D/broken_heart_3d.png' class='emoji-img'>",
+            "Tu vas finir par craquer... <img src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Revolving%20hearts/3D/revolving_hearts_3d.png' class='emoji-img'>",
+            "Sérieusement Nathan ? <img src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Face%20with%20steam%20from%20nose/3D/face_with_steam_from_nose_3d.png' class='emoji-img'>",
+            "Dernière chance avant le hack... <img src='https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Squinting%20face%20with%20tongue/3D/squinting_face_with_tongue_3d.png' class='emoji-img'>"
+        ];
+
+        function openLetter() {
+            document.getElementById('step-envelope').style.display = 'none';
+            document.getElementById('step-question').style.display = 'block';
+        }
+
+        btnYes.addEventListener('click', () => {
+            if (clickCount < phrases.length) {
+                insistanceMsg.innerHTML = phrases[clickCount];
+                insistanceMsg.classList.remove('vibrate');
+                void insistanceMsg.offsetWidth; 
+                insistanceMsg.classList.add('vibrate');
+                yesScale += 0.22;
+                btnYes.style.transform = `scale(${yesScale})`;
+                clickCount++;
+            } else {
+                startHack();
+            }
+        });
+
+        // Version mobile/touch
+        document.getElementById('btn-no').addEventListener('touchstart', moveButton);
+        document.getElementById('btn-no').addEventListener('mouseover', moveButton);
+
+        function moveButton(e) {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            e.target.style.position = 'fixed';
+            e.target.style.left = x + 'px';
+            e.target.style.top = y + 'px';
+        }
+
+        function startHack() {
+            document.getElementById('step-question').style.display = 'none';
+            document.getElementById('step-hack').style.display = 'flex';
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(showFinal, 800);
+                } else {
+                    width += Math.random() * 3.5;
+                    if (width > 100) width = 100;
+                    bar.style.width = width + '%';
+                    if (width > 80) {
+                        hackTitle.innerText = "🚨 SYSTÈME COMPROMIS 🚨";
+                        hackTitle.style.color = "red";
+                    }
+                    hackStatus.innerText = `HACK PROGRESS : ${Math.floor(width)}%`;
+                }
+            }, 60);
+        }
+
+        function showFinal() {
+            document.getElementById('step-hack').style.display = 'none';
+            document.getElementById('step-final').style.display = 'block';
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const hearts = [
+                'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Red%20heart/3D/red_heart_3d.png',
+                'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Sparkles/3D/sparkles_3d.png'
+            ];
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('img');
+                heart.src = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-50px';
+                heart.style.width = '20px';
+                heart.style.zIndex = '2000';
+                heart.style.transition = `transform ${Math.random() * 3 + 2}s linear`;
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
+                }, 100);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>
